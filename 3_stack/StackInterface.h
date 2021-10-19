@@ -6,7 +6,7 @@
 #ifndef STACK_INTERFACE_
 #define STACK_INTERFACE_
 
-template<class ItemType>
+template <class ItemType>
 class StackInterface
 {
 public:
@@ -18,7 +18,7 @@ public:
     @post  If the operation was successful, newEntry is at the top of the stack.
     @param newEntry  The object to be added as a new entry.
     @return  True if the addition is successful or false if not. */
-   virtual bool push(const ItemType& newEntry) = 0;
+   virtual bool push(const ItemType &newEntry) = 0;
 
    /** Removes the top of this stack.
     @post  If the operation was successful, the top of the stack
@@ -34,6 +34,6 @@ public:
    virtual ItemType peek() const = 0;
 
    /** Destroys this stack and frees its assigned memory. */
-   virtual ~StackInterface() { }
+   virtual ~StackInterface() {}
 }; // end StackInterface
 #endif
