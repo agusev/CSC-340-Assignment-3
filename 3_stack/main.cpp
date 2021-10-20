@@ -7,13 +7,12 @@
 
 #include <iostream>
 #include <string>
-using std::istringstream;
 #include <sstream>
-#include <iterator>
 
 #include "ArrayStack.h"
 using namespace std;
 
+// Array for testing isPalindrome
 string test_arr[41] = {"Sunny Cove",
                        "Willow Cove",
                        "Golden Cove",
@@ -55,6 +54,7 @@ string test_arr[41] = {"Sunny Cove",
                        "As I pee, sir, I see Pisa!",
                        "Avid div7a."};
 
+// Array for testing Revrse function
 string test_arr_reverse[8] = {
     "Sunny Cove",
     "A car a man a maraca",
@@ -66,6 +66,7 @@ string test_arr_reverse[8] = {
     "Race fast safe car",
 };
 
+// keep only alphanunerical values in the string
 string normalizeString(string str)
 {
     string string;
@@ -82,6 +83,8 @@ string normalizeString(string str)
     return string;
 }
 
+// returns true if the string is palindrome
+// otherwise returns false
 bool isPalindrome(string s)
 {
     if (s.size() == 0)
@@ -108,9 +111,14 @@ bool isPalindrome(string s)
     {
         if (stack1->peek() != stack2->peek())
         {
+            delete stack1;
+            delete stack2;
             return false;
         }
     }
+
+    delete stack1;
+    delete stack2;
 
     return true;
 }
@@ -118,6 +126,7 @@ bool isPalindrome(string s)
 int main(int ac, char **av)
 {
 
+    // testing isPalindrome function
     if (ac == 2 && strcmp(av[1], "--palindrome") == 0)
     {
         int i = 0;
@@ -138,9 +147,12 @@ int main(int ac, char **av)
             cout << endl;
             i++;
         }
-    }
+    } // end if
+
+    // testing the reverse string with user's input
     else if (ac == 2 && strcmp(av[1], "--reverse") == 0)
     {
+
         const char *prompt = "Enter a string: ";
         string input;
         StackInterface<string> *stack = new ArrayStack<string>();
@@ -167,7 +179,6 @@ int main(int ac, char **av)
         {
             streamStr >> str;
             stack->push(str);
-
             cout << stack->peek() << " ";
         }
         cout << "\033[0m" << endl;
@@ -182,7 +193,9 @@ int main(int ac, char **av)
         cout << "\033[0m" << endl;
         cout << endl;
         delete stack;
-    }
+    } // end if
+
+    // testing the reverse string with preset array
     else if (ac == 2 && strcmp(av[1], "--reverse-test") == 0)
     {
         StackInterface<string> *stack = new ArrayStack<string>();
@@ -218,7 +231,9 @@ int main(int ac, char **av)
             i++;
         }
         delete stack;
-    }
+    } // if
+
+    // otherwise testing isPalindrome with user's input
     else
     {
         const char *prompt = "Enter a string: ";

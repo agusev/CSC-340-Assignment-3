@@ -3,20 +3,6 @@
 // Copyright 2021 - Aleksandr Gusev
 // Email: agusev@sfsu.edu
 
-/**
- * This program determines whether a string is palindrome or not, 
- * considering only alphanumeric characters and ignoring cases. 
- * 
- * to compile:
- * g++ AleksandrGusev-Assignment-03_1.cpp -Wall -Werror -Wextra
- * or
- * g++ AleksandrGusev-Assignment-03_1.cpp -Wall -Werror -Wextra
- * or to test
- * g++ AleksandrGusev-Assignment-03_1.cpp ---test
- * then
- * ./a.out
-*/
-
 #include <iostream>
 #include <string>
 using namespace std;

@@ -9,14 +9,17 @@
 #define _ARRAY_STACK
 #include "StackInterface.h"
 #include <cassert>
+using namespace std;
 
-const int MAX_STACK = 6;
+// default arraySize
+int arraySize = 6;
 
 template <class ItemType>
 class ArrayStack : public StackInterface<ItemType>
 {
+
 private:
-    ItemType items[MAX_STACK];
+    ItemType *items;
     int top;
 
 public:
@@ -25,14 +28,15 @@ public:
     bool isEmpty() const;
     bool push(const ItemType &newEntry);
     bool pop();
+
     ItemType peek() const;
 };
 
-// constructor
+// default constructor
 template <class ItemType>
 ArrayStack<ItemType>::ArrayStack() : top(-1)
 {
-    std::cout << "\033[32m\n*************************** ArrayStack CREATED ***************************\n\n\033[0m";
+    items = new ItemType[arraySize];
 }
 
 // destructor
@@ -43,7 +47,6 @@ ArrayStack<ItemType>::~ArrayStack()
     {
         pop();
     }
-    std::cout << "\033[31m\n*************************** ArrayStack DELETED ***************************\n\n\033[0m";
 }
 
 // isEmpty()
@@ -58,16 +61,31 @@ template <class ItemType>
 bool ArrayStack<ItemType>::push(const ItemType &newEntry)
 {
     bool result = false;
-    if (top < MAX_STACK - 1)
+    top++;
+
+    // resize array
+    if (!(top < arraySize))
     {
-        top++;
+        ItemType *oldArray = items;
+        items = new ItemType[2 * arraySize];
+        for (int index = 0; index < arraySize; index++)
+        {
+            items[index] = oldArray[index];
+        }
+        delete[] oldArray;
+        arraySize *= 2;
+    } // end if
+
+    if (top < arraySize)
+    {
         items[top] = newEntry;
         result = true;
     }
+
     return result;
 }
 
-// pop()
+// pop
 template <class ItemType>
 bool ArrayStack<ItemType>::pop()
 {
@@ -81,9 +99,11 @@ bool ArrayStack<ItemType>::pop()
 }
 
 // peek()
+// returns the top element from the stack
 template <class ItemType>
 ItemType ArrayStack<ItemType>::peek() const
 {
+
     assert(!isEmpty());
     return items[top];
 }
